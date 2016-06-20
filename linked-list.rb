@@ -19,19 +19,20 @@ class LinkedList
    end
 
    def add(value)
-       if @size == 0
-         @head = Node.new(value,nil)
-         @size += 1
-       end
-       # Traverse to the end of the list
-       # And insert a new node over there with the specified value
-       current = @head
-       while current.next_node != nil
-           current = current.next_node
-       end
-       current.next_node = Node.new(value,nil)
-       @size += 1
-       self
+      if @size == 0
+        @head = Node.new(value,nil)
+        @size += 1
+     else
+     # Traverse to the end of the list
+     # And insert a new node over there with the specified value
+        current = @head
+        while current.next_node != nil
+          current = current.next_node
+        end
+        current.next_node = Node.new(value,nil)
+        @size += 1
+      end
+      self
    end
 
    def delete(val)
@@ -95,5 +96,81 @@ class LinkedList
      end
      return max
    end
+
+
+
+
+
+  def sort(data)
+     # no auxilary storage, no new nodes, no new arrays
+     # all you can do is tell next node where to point to
+
+    insertion = @head
+    current = @head.next_node
+
+    while current != nil
+      insertion = @head
+
+      while insertion.next_node != current
+        if insertion > current
+          temp = current
+          current = insertion
+          insertion = temp
+        else
+          insertion = insertion.next_node
+        end
+      end
+      current = current.next_node
+    end
+
+  end
+
+
+  #    data = [ 3, 6, 9, 2, 1 ]
+  #    2 pointers pointing at same element
+  #    3 is the current @head
+  #    3 is pointer
+   #
+  #    increment current by 1, next node  #i at head and current at [1]
+  #    check if insertion > current, if yes, swap them
+  #    check again, is insertion > current, if not
+  #    increment current by 1
+  #    insertion remains at head
+   #
+  #    check is insertion > current, if yes, swap
+  #    check again if inseriton > current, if not,
+  #    increment insertion pointer by 1,
+   #
+  #    check if insertion > current, if yes swap
+  #    check if insertion > current, if not
+  #    increment current pointer by 1
+  #    reset the insertion pointer to point to the head
+   #
+  #    is insertion > current, if not
+  #    increment insertion pointer
+  #    check again
+  #    is insertion > current, if not
+  #    increment insertion pointer
+  #    check again
+  #    is insertion > current, if not
+   #
+  #    increment current pointer by 1
+  #    reset insetion pointer to head
+ #keep gpoing until done
+
+
+  def reverse(data)
+    current = @head
+    previous = nil
+
+    while current != nil
+      @next = current.next_node
+      current.next_node = previous
+      previous = current
+      current = @next
+    end
+    @head = previous
+  end
+
 
 end

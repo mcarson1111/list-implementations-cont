@@ -52,4 +52,9 @@ class ArrayList
     @size == 0
   end
 
+  def sort(data)
+    data.sort do |a,b| a <=> b end
+      # @storage.sort! this works also
+  end
+
 end
